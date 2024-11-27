@@ -18,7 +18,7 @@ export const VideoResourcesPanel = observer(() => {
       store.setVideos([]);
     const { data, error } = await supabase
   .storage
-  .from('vstock.bucket.1')
+  .from(`${process.env.NEXT_PUBLIC_SUPABASE_BUCKET_NAME}`)
   .list('admin_videos', {
     limit: 100,
     offset: 0,

@@ -17,7 +17,7 @@ filename: string;
 export const AssetsResource = observer(
   ({filename}: AssetResourceProps) => {
     const supabase=createClient();
-    const { data } = supabase.storage.from('vstock.bucket.1').getPublicUrl(`admin_assets/${filename}`)
+    const { data } = supabase.storage.from(`${process.env.NEXT_PUBLIC_SUPABASE_BUCKET_NAME}`).getPublicUrl(`admin_assets/${filename}`)
     const store = React.useContext(StoreContext);
     const ref = React.useRef<HTMLVideoElement>(null);
     const [formatedVideoLength, setFormatedVideoLength] =React.useState("00:00");
