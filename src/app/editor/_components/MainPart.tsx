@@ -21,7 +21,6 @@ import {
 
 export const MainPart = observer(() => {
   const store = useContext(StoreContext);
-
   const handleCopyObject=()=>{
     if(!store.canvas) return;
     if(store.canvas===undefined) return;
@@ -71,11 +70,11 @@ export const MainPart = observer(() => {
           </button>
         </div>
         <div className="inline-flex flex-row items-center  justify-end  w-full">
-          <button className="w-10 h-10">
+          <button onClick={()=>store.removeObject(store.canvas)} className="w-10 h-10">
             <MdDelete size={24} className="cursor-pointer" />
           </button>
           <button className="w-10 h-10">
-            <MdPlayArrow size={24} className="cursor-pointer"></MdPlayArrow>
+            <MdPlayArrow onClick={()=>store.sendObjectStepWiseBackward(store.canvas)} size={24} className="cursor-pointer"></MdPlayArrow>
           </button>
           <button className="w-10 h-10">
             <MdLayers size={24} className="cursor-pointer" />

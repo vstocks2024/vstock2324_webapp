@@ -20,7 +20,6 @@ export const Editor = observer(() => {
           width: store.width,
           backgroundColor: "#242832",
           preserveObjectStacking:true,
-          
         });
         fabric.FabricObject.prototype.transparentCorners = true;
     

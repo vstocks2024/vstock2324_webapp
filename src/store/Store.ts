@@ -60,33 +60,35 @@ export class Store{
         const w = Number(this.canvas.width) - 10 ;
         const h= w * 0.5625; 
         this.canvas.setWidth(w);
-        this.canvas.setHeight(h)
+        this.canvas.setHeight(h);
       }
       addVideo(url:string){
         if(!this.canvas) return;
         const video1El = document.createElement('video');
         const video1source = document.createElement('source');
-        
-      video1El.id=nanoid()
-      video1El.width = 775.11;
-      video1El.height = 436;
-      video1El.id = 'video1'
+      video1El.id=nanoid();
+      video1El.width=200;
+      video1El.height=125;
       video1El.muted = true;
       video1El.appendChild(video1source);
-
       video1source.src = url;
       video1El.onended = () => video1El.play();
-      const video1 = new fabric.FabricImage(video1El, {
-        left: 0,
-        top: 0,
-        angle: 0,
-        originX:'left',
-        originY:'top',
-        objectCaching: false,
-      });
+      const video1 = new fabric.FabricObject(video1El);
+      video1._controlsVisibility={
+        bl: true,
+          br: true,
+          mb: false,
+          ml: false,
+          mr: false,
+          mt: false,
+          tl: true,
+          tr: true,
+          mtr: true,
+      }
       this.canvas.add(video1);
       video1El.play();
-      }
+    }
+      
       setCopy(canvas: fabric.Canvas | undefined){
         this.canvas=canvas;
         if(!this.canvas) return;
@@ -125,6 +127,68 @@ export class Store{
         this.canvas.requestRenderAll();
       }
       addImage(url:string){
-        console.log(url);
+        const image1El = document.createElement("img");
+        image1El.src=url;
+        image1El.id=nanoid();
+        image1El.crossOrigin="anonymous";
+        image1El.onload=()=>{
+          if(!this.canvas) return;
+        const image1 = new fabric.FabricImage(image1El, {
+          left: 0,
+          top: 0,
+          angle: 0,
+          originX:'left',
+          originY:'top',
+          objectCaching: false,
+          width:image1El.naturalWidth,
+          height:image1El.naturalHeight,
+        });
+        image1.scaleToWidth(200);
+        image1.scaleToHeight(200*(image1El.naturalHeight/image1El.naturalWidth));
+        this.canvas.add(image1);
+        }
+      }
+      addTextbox(){
+        // const textbox=new fabric.Textbox("Start Typing",{
+        //   left:0,
+        //   top:0,
+        //   angle:0,
+          
+        //   fontSize:70,
+          
+        // })
+
+        // this.canvas?.add(textbox);
+        const fabrictextbox=new fabric.FabricText("Start Typing",{
+          left:0,
+          top:0,
+          angle:0,
+          fontSize:70,
+          stroke:"#777",
+        })
+        this.canvas?.add(fabrictextbox);
+      }
+      removeObject(canvas:fabric.Canvas | undefined){
+        this.canvas=canvas;
+        if(!this.canvas) return;
+        const objArray=this.canvas.getActiveObjects();
+        objArray.forEach((obj)=>{
+          this.canvas?.remove(obj)
+          console.log(this.canvas?.getObjects());
+        })
+      }
+      sendObjectBackward(canvas:fabric.Canvas | undefined){
+        this.canvas=canvas;
+        if(!this.canvas) return;
+        const selectedObject=this.canvas.getActiveObject();
+        if(selectedObject===undefined) return;
+        this.canvas.sendObjectToBack(selectedObject)
+      }
+      sendObjectStepWiseBackward(canvas:fabric.Canvas | undefined){
+        this.canvas=canvas;
+        if(!this.canvas) return;
+        const selectedObject=this.canvas.getActiveObject();
+        if(selectedObject===undefined) return;
+        this.canvas.sendObjectBackwards(selectedObject);
       }
 }

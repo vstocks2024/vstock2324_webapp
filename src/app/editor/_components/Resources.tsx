@@ -6,7 +6,6 @@ import React from "react";
 import { ImageResourcePanel } from "../_components/panels/ImageResourcePanel";
 import { AudioResourcesPanel } from "./panels/AudioResourcePanel";
 
-
 export const Resources = observer(() => {
   const store = React.useContext(StoreContext);
   const selectedMenuOption = store.selectedMenuOption;
@@ -20,7 +19,6 @@ export const Resources = observer(() => {
       {selectedMenuOption === "Video" ? <VideoResourcesPanel /> : null}
       {selectedMenuOption === "Images" ? <ImageResourcePanel /> : null }
       {selectedMenuOption === "Audio" ? <AudioResourcesPanel/> : null }
-      
     </div>
   );
 });

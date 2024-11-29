@@ -62,16 +62,7 @@ const MENU_OPTIONS = [
     name: "Text",
     icon: MdTitle,
     action: (store: Store) => {
-        store.setSelectedMenuOption("Text");
-        if(!store.canvas) return;
-       const ellipse=new fabric.Ellipse({ 
-         rx:60,
-         ry:30,
-         fill:"red",
-         left: 100, top: 100,
-         includeDefaultValues: true,
-        })
-        store.canvas.add(ellipse);
+      store.addTextbox();
     }
   },
 
