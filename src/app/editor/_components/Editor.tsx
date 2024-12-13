@@ -13,6 +13,11 @@ import { BackCustomize } from './BackCustomize';
 
 export const Editor = observer(() => {
     const store = React.useContext(StoreContext);
+    const handleMouseDown=(e:fabric.TPointerEventInfo<fabric.TPointerEvent>)=>{
+      if (!e.target) {
+        store.setSelectedElement(undefined);
+      }
+   }
     
     useEffect(() => {
       const canvas = new fabric.Canvas("lower-canvas", {
@@ -26,6 +31,7 @@ export const Editor = observer(() => {
         fabric.FabricObject.prototype.cornerStyle = "rect";
     
         fabric.FabricObject.prototype.cornerSize = 14;
+        canvas.on("mouse:down",handleMouseDown);
     
         store.setCanvas(canvas);
     
@@ -33,10 +39,11 @@ export const Editor = observer(() => {
           canvas.renderAll();
           fabric.util.requestAnimFrame(render);
         });
-
+      
         return ()=>{
-        
+          canvas.off("mouse:down",handleMouseDown);
           // canvas.dispose();
+
         }
       }, []);
 

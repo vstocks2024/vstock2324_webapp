@@ -62,7 +62,8 @@ const MENU_OPTIONS = [
     name: "Text",
     icon: MdTitle,
     action: (store: Store) => {
-      store.addTextbox();
+      if(!store || !store.canvas) return;
+      store.addTextbox(store.canvas);
     }
   },
 
@@ -70,6 +71,7 @@ const MENU_OPTIONS = [
     name: "Images",
     icon: IoImages,
     action: (store: Store) => {
+      if(!store) return;
       store.setSelectedMenuOption("Images");
     },
   },
@@ -77,6 +79,7 @@ const MENU_OPTIONS = [
     name: "Audio",
     icon: MdLibraryMusic,
     action: (store: Store) => {
+      if(!store) return;
       store.setSelectedMenuOption("Audio");
     },
   },
@@ -84,6 +87,7 @@ const MENU_OPTIONS = [
     name: "Shapes",
     icon: PiShapesFill,
     action: (store: Store) => {
+      if(!store) return;
       store.setSelectedMenuOption("Shapes");
     },
   },
@@ -91,6 +95,7 @@ const MENU_OPTIONS = [
     name: "Stickers",
     icon: PiSmileyStickerFill,
     action: (store: Store) => {
+      if(!store) return;
       store.setSelectedMenuOption("Stickers");
     },
   },
@@ -98,6 +103,7 @@ const MENU_OPTIONS = [
     name: "Video",
     icon: MdVideocam,
     action: (store: Store) => {
+      if(!store ) return;
       store.setSelectedMenuOption("Video");
     },
   },
@@ -105,6 +111,7 @@ const MENU_OPTIONS = [
     name: "Assets",
     icon: MdWebStories,
     action: (store: Store) => {
+      if(!store) return;
       store.setSelectedMenuOption("Assets");
     },
   },
@@ -133,6 +140,7 @@ const MENU_OPTIONS = [
     name: "Export",
     icon: MdDownload,
     action: (store: Store) => {
+      if(!store) return;
       store.setSelectedMenuOption("Export");
     },
   },

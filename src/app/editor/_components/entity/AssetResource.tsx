@@ -11,42 +11,29 @@ import { IoIosPricetag } from "react-icons/io";
 import { nanoid } from "nanoid";
 import { createClient } from "@/utils/supabase/client";
 
-type AssetResourceProps = {
+type VideoResourceProps = {
 filename: string;
 };
-export const AssetsResource = observer(
-  ({filename}: AssetResourceProps) => {
+export const AssetResource = observer(
+  ({filename}: VideoResourceProps) => {
     const supabase=createClient();
-    const { data } = supabase.storage.from(`${process.env.NEXT_PUBLIC_SUPABASE_BUCKET_NAME}`).getPublicUrl(`admin_assets/${filename}`)
+    const { data } = supabase.storage.from(`${process.env.NEXT_PUBLIC_SUPABASE_BUCKET_NAME}`).getPublicUrl(`admin_videos/${filename}`)
     const store = React.useContext(StoreContext);
     const ref = React.useRef<HTMLVideoElement>(null);
     const [formatedVideoLength, setFormatedVideoLength] =React.useState("00:00");
-     // Code for Delete Video Buttton
-    async function handleVideoDeleteButton(){
-     try{
-       console.log(store);
-      }
-      catch(error){
-        console.log(error);
-      }
-       
-    }
-    /// End of delete video code button
+
   
     return (
       <div className="rounded-lg  bg-slate-800 my-2 mx-1 flex flex-col items-center justify-start relative">
         <div className="bg-transparent text-white py-1 absolute  text-sm bottom-2 left-2">
           {formatedVideoLength}
           </div>
-         
-          <button className="hover:bg-[#00a0f5] rounded z-10 text-white font-bold py-1 absolute text-lg top-2 right-2 bg-transparent"
-          onClick={handleVideoDeleteButton}><MdDelete size={20}/></button>
-           <button className="hover:bg-[#00a0f5]  rounded z-10 text-white font-bold py-1 absolute text-lg top-2 left-2  bg-transparent">
+           <button className="hover:bg-[#00a0f5]  rounded z-10 text-white font-bold py-1 absolute text-lg top-2 right-2  bg-transparent">
             <IoIosPricetag size={20}/>
           </button>
         <button
           className="hover:bg-[#00a0f5] bg-transparent rounded z-10 text-white font-bold py-1 absolute text-lg bottom-2 right-2"
-          onClick={() => {}}>
+          onClick={() => {store.addVideo(store.canvas,data.publicUrl)}}>
           <MdAdd size={20} />
         </button>
         <video

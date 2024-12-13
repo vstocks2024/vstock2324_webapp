@@ -5,6 +5,8 @@ import { IoMdArrowBack } from "react-icons/io";
 import React from "react";
 import { ImageResourcePanel } from "../_components/panels/ImageResourcePanel";
 import { AudioResourcesPanel } from "./panels/AudioResourcePanel";
+import { ShapesResourcePanel} from "./panels/ShapesResorcePanel";
+import { AssetsResourcesPanel } from "./panels/AssetsResourcePanel";
 
 export const Resources = observer(() => {
   const store = React.useContext(StoreContext);
@@ -19,6 +21,8 @@ export const Resources = observer(() => {
       {selectedMenuOption === "Video" ? <VideoResourcesPanel /> : null}
       {selectedMenuOption === "Images" ? <ImageResourcePanel /> : null }
       {selectedMenuOption === "Audio" ? <AudioResourcesPanel/> : null }
+      {selectedMenuOption === "Shapes" ? <ShapesResourcePanel/> :null}
+      {selectedMenuOption === "Assets" ? <AssetsResourcesPanel/> :null}
     </div>
   );
 });

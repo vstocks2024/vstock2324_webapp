@@ -1,7 +1,6 @@
 export type MenuOption =
   | "Video"
   | "Audio"
-  | "Text"
   | "Images"
   | "Export"
   | "Animation"

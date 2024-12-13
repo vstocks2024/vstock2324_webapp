@@ -7,6 +7,7 @@ import { observer } from "mobx-react";
 import { VideoResource } from "../entity/VideoResource";
 import { nanoid } from "nanoid";
 import { createClient } from "@/utils/supabase/client";
+import { AssetResource } from "../entity/AssetResource";
 
 export const AssetsResourcesPanel = observer(() => {
   const store = React.useContext(StoreContext);
@@ -44,7 +45,7 @@ export const AssetsResourcesPanel = observer(() => {
     <div className="items-center overflow-x-hidden overflow-y-auto justify-start flex flex-col py-2  px-0.5 w-[250px] h-[510px]">
    {
     store.videos.map((video)=>{
-      return <><VideoResource key={nanoid()} filename={video}/></>
+      return <><AssetResource key={nanoid()} filename={video}/></>
     })
   }
   </div>

@@ -10,9 +10,7 @@ import { createClient } from "@/utils/supabase/client";
 
 export const VideoResourcesPanel = observer(() => {
   const store = React.useContext(StoreContext);
-  console.log(store);
   const supabase = createClient();
-  
   async function init(){
     try{
       store.setVideos([]);

@@ -35,7 +35,7 @@ const handleImageUpload=async(event:React.ChangeEvent<HTMLInputElement>)=>{
     if(!file) return;
     const { data:{user} } = await supabase.auth.getUser();
     if(!user) redirect("/auth");
-    const { data, error } = await supabase.storage.from(`${process.env.NEXT_PUBLIC_SUPABASE_BUCKET_NAME}`).upload(`user_images/${user.id}/${file.name}_${Date.now()}`, file, {
+    const { data, error } = await supabase.storage.from(`${process.env.NEXT_PUBLIC_SUPABASE_BUCKET_NAME}`).upload(`user_images/${user.id}/${Date.now()}_${file.name.split(".")[0]}`, file, {
     upsert: false
   })
   if(error){
